@@ -1,0 +1,25 @@
+{
+  "id": "rack-a2-sample-check",
+  "title": "Rack A-2 sample check",
+  "titleHi": "रैक A-2 नमूना जाँच",
+  "version": 1,
+  "notes": "Every step can be completed manually (button), by voice (\"mark step complete\") or with a thumbs-up gesture. Steps with an `auto` rule also complete by themselves when the live detection rule holds for `seconds`.",
+  "steps": [
+    { "id": "S1", "title": "Crew in position", "titleHi": "क्रू स्थिति में",
+      "instruction": "Face the camera with your head and shoulders in view", "instructionHi": "कैमरे की ओर मुँह करें, सिर और कंधे दिखें",
+      "auto": { "type": "pose_visible", "minVisibility": 0.6, "seconds": 2 } },
+    { "id": "S2", "title": "Posture check", "titleHi": "मुद्रा जाँच",
+      "instruction": "Hold a neutral, upright posture", "instructionHi": "सीधी, सामान्य मुद्रा में रहें",
+      "auto": { "type": "posture_nominal", "seconds": 3 } },
+    { "id": "S3", "title": "Hands ready", "titleHi": "हाथ तैयार",
+      "instruction": "Show both open hands to the camera", "instructionHi": "दोनों खुले हाथ कैमरे को दिखाएँ",
+      "auto": { "type": "hands_visible", "count": 2, "seconds": 1.5 } },
+    { "id": "S4", "title": "Retrieve sample container", "titleHi": "नमूना पात्र निकालें",
+      "instruction": "Hold the sample bottle in view of the camera", "instructionHi": "नमूने की बोतल कैमरे के सामने रखें",
+      "auto": { "type": "object_present", "label": "bottle", "minConf": 0.5, "seconds": 1.5 } },
+    { "id": "S5", "title": "Inspect sample", "titleHi": "नमूना जाँचें",
+      "instruction": "Inspect the sample, then give a thumbs up", "instructionHi": "नमूना जाँचें, फिर अंगूठा ऊपर करें" },
+    { "id": "S6", "title": "Stow and confirm", "titleHi": "रखें और पुष्टि करें",
+      "instruction": "Stow the sample and confirm the step", "instructionHi": "नमूना रखें और चरण की पुष्टि करें" }
+  ]
+}

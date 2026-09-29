@@ -1,0 +1,15 @@
+:root{
+--glow-white:0 0 10px rgba(255,255,255,.35);
+--glow-amber:0 0 14px rgba(255,138,31,.65);
+--glow-red:0 0 14px rgba(255,59,59,.6);
+--glow-green:0 0 10px rgba(43,214,123,.5);
+--bg-grid:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px) 0 0/40px 40px,linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px) 0 0/40px 40px; /* @kind other */
+--bg-dots:radial-gradient(rgba(255,255,255,.08) 1px,transparent 1.2px) 0 0/8px 8px; /* @kind other */
+--ease-out:cubic-bezier(.2,.8,.2,1); /* @kind other */
+--ease-in-out:cubic-bezier(.6,0,.3,1); /* @kind other */
+--ease-linear:linear; /* @kind other */
+--dur-fast:120ms; /* @kind other */
+--dur-base:240ms; /* @kind other */
+--dur-slow:600ms; /* @kind other */
+--dur-pulse:1600ms; /* @kind other */
+}

@@ -1,0 +1,5 @@
+# Optional: real object detection with YOLOv8 (CPU build of PyTorch shown; use the CUDA index for GPUs).
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+torchvision
+ultralytics>=8.2

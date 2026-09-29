@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Vision harness</title>
+<style>body{margin:0;background:#000;color:#fff;font:12px monospace}#w{position:relative;width:640px;height:480px}video,canvas{position:absolute;inset:0;width:640px;height:480px}video{transform:scaleX(-1)}</style></head>
+<body><div id="w"><video id="v" muted playsinline></video><canvas id="c"></canvas></div><pre id="out"></pre>
+<script type="module">
+import { VisionEngine } from '/src/live/vision.js';
+window.__events = [];
+const log = (k, x) => window.__events.push({ t: performance.now() | 0, k, ...x });
+const eng = new VisionEngine({
+  onStatus: (s, e, d) => log('status', { s, e, d }),
+  onGesture: g => log('gesture', g),
+  onPosture: p => log('posture', { level: p.level, reasons: p.reasons.map(r => r.key + ':' + r.value.toFixed(1)) }),
+});
+eng.setOptions({ objects: 'browser' });
+window.__eng = eng;
+const v = document.getElementById('v');
+const s = await navigator.mediaDevices.getUserMedia({ video: { width: 640, height: 480 } });
+v.srcObject = s; await v.play();
+eng.start(v, document.getElementById('c'));
+setInterval(() => {
+  const L = eng.latest;
+  window.__samples = window.__samples || [];
+  window.__samples.push({ t: performance.now() | 0, fps: L.fps, inf: +L.inferenceMs.toFixed(1), hands: L.hands.map(h => h.side + ':' + (h.gesture || h.raw) + ':' + h.score.toFixed(2)),
+    pose: L.pose ? Object.fromEntries(Object.entries(L.pose.metrics).map(([k, v]) => [k, v == null ? null : +v.toFixed(1)])) : null, posture: L.posture.level,
+    objects: eng.browserDetections.list.map(d => d.label + ':' + d.conf.toFixed(2)), motion: +eng.motion.energy.toFixed(3), contours: eng.motion.contours.length });
+}, 500);
+</script></body></html>
